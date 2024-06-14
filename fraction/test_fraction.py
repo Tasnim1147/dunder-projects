@@ -505,6 +505,59 @@ def test_fraction_le_method():
     frac2 = Fraction(1, 2)
     assert frac1 <= frac2  # 1000000000/3000000000 <= 1/2
 
+def test_fraction_simplify_method():
+    """
+    Test the simplify method of the Fraction class.
+    """
+
+    # Test simplifying a fraction with common factors
+    frac = Fraction(4, 8)
+    frac.simplify()
+    assert frac.numerator == 1
+    assert frac.denominator == 2  # 4/8 simplifies to 1/2
+
+    # Test simplifying a fraction with no common factors
+    frac = Fraction(3, 7)
+    frac.simplify()
+    assert frac.numerator == 3
+    assert frac.denominator == 7  # 3/7 simplifies to 3/7 (unchanged)
+
+    # Test simplifying a fraction with negative numerator
+    frac = Fraction(-6, 9)
+    frac.simplify()
+    assert frac.numerator == -2
+    assert frac.denominator == 3  # -6/9 simplifies to -2/3
+
+    # Test simplifying a fraction with negative denominator
+    frac = Fraction(6, -9)
+    frac.simplify()
+    assert frac.numerator == -2
+    assert frac.denominator == 3  # 6/-9 simplifies to -2/3
+
+    # Test simplifying a fraction with both negative numerator and denominator
+    frac = Fraction(-6, -9)
+    frac.simplify()
+    assert frac.numerator == 2
+    assert frac.denominator == 3  # -6/-9 simplifies to 2/3
+
+    # Test simplifying a fraction that is already in simplest form
+    frac = Fraction(1, 2)
+    frac.simplify()
+    assert frac.numerator == 1
+    assert frac.denominator == 2  # 1/2 simplifies to 1/2 (unchanged)
+
+    # Test simplifying a fraction with zero numerator
+    frac = Fraction(0, 5)
+    frac.simplify()
+    assert frac.numerator == 0
+    assert frac.denominator == 1  # 0/5 simplifies to 0/1
+
+    # Test simplifying a large fraction
+    frac = Fraction(1000000, 2000000)
+    frac.simplify()
+    assert frac.numerator == 1
+    assert frac.denominator == 2  # 1000000/2000000 simplifies to 1/2
+
 
 
 # Run the tests
