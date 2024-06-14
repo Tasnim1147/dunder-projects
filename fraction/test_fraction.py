@@ -111,12 +111,6 @@ def test_fraction_add_method():
     assert result.numerator == 11
     assert result.denominator == 4  # 3/4 + 2 = 3/4 + 8/4 = 11/4
 
-    # Test with reverse addition (integer + fraction)
-    frac1 = Fraction(3, 4)
-    result = frac1 + 2  # Adding fraction to integer
-    assert result.numerator == 11
-    assert result.denominator == 4  # 2 + 3/4 = 8/4 + 3/4 = 11/4
-
     # Test with zero numerator
     frac1 = Fraction(0, 4)
     frac2 = Fraction(1, 4)
@@ -161,6 +155,72 @@ def test_fraction_add_method_unsupported_types():
         
     with pytest.raises(TypeError, match=r"Unsupported operand types for \+: 'Fraction' and 'float'"):
         frac + 1.0
+        
+def test_fraction_sub_method():
+    """
+    Test the __sub__ method of the Fraction class.
+    """
+
+    # Test with positive fractions
+    frac1 = Fraction(3, 4)
+    frac2 = Fraction(1, 4)
+    result = frac1 - frac2
+    assert result.numerator == 1
+    assert result.denominator == 2  # 3/4 - 1/4 = 2/4 = 1/2
+
+    # Test with negative fractions
+    frac1 = Fraction(-3, 4)
+    frac2 = Fraction(-1, 4)
+    result = frac1 - frac2
+    assert result.numerator == -1
+    assert result.denominator == 2  # -3/4 - (-1/4) = -2/4 = -1/2
+
+    # Test with positive and negative fractions
+    frac1 = Fraction(1, 4)
+    frac2 = Fraction(-1, 4)
+    result = frac1 - frac2
+    assert result.numerator == 1
+    assert result.denominator == 2  # 1/4 - (-1/4) = 2/4 = 1/2
+
+    # Test with different denominators
+    frac1 = Fraction(1, 2)
+    frac2 = Fraction(1, 3)
+    result = frac1 - frac2
+    assert result.numerator == 1
+    assert result.denominator == 6  # 1/2 - 1/3 = 3/6 - 2/6 = 1/6
+
+    # Test with integer subtraction
+    frac1 = Fraction(3, 4)
+    result = frac1 - 1  # Subtracting integer from fraction
+    assert result.numerator == -1
+    assert result.denominator == 4  # 3/4 - 1 = 3/4 - 4/4 = -1/4
+
+    # Test with zero numerator
+    frac1 = Fraction(0, 4)
+    frac2 = Fraction(1, 4)
+    result = frac1 - frac2
+    assert result.numerator == -1
+    assert result.denominator == 4  # 0/4 - 1/4 = -1/4
+
+    # Test with zero fractions
+    frac1 = Fraction(0, 4)
+    frac2 = Fraction(0, 4)
+    result = frac1 - frac2
+    assert result.numerator == 0
+    assert result.denominator == 4  # 0/4 - 0/4 = 0/4 = 0
+
+    # Test with negative fraction and integer
+    frac1 = Fraction(-1, 4)
+    result = frac1 - 1  # Subtracting integer from negative fraction
+    assert result.numerator == -5
+    assert result.denominator == 4  # -1/4 - 1 = -1/4 - 4/4 = -5/4
+
+    # Test with large integers
+    frac1 = Fraction(1000000000, 1000000001)
+    frac2 = Fraction(1, 1000000001)
+    result = frac1 - frac2
+    assert result.numerator == 999999999
+    assert result.denominator == 1000000001  
 
         
 
