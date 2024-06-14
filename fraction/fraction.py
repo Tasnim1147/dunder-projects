@@ -59,7 +59,7 @@ class Fraction:
         Static method to calculate the greatest common divisor (GCD) of two numbers.
     """
 
-    def __init__(self, a: int, b: int) -> None:
+    def __init__(self, a: int, b: int, simplify: bool = False) -> None:
         """
         Constructs a Fraction object with the given numerator and denominator.
         
@@ -79,6 +79,7 @@ class Fraction:
             raise ValueError("Denominator cannot be zero")
         self.numerator = a 
         self.denominator = b
+        if simplify: self.simplify()
         
     def __str__(self) -> str:
         """
@@ -103,29 +104,37 @@ class Fraction:
             A string representation for debugging.
         """
         if self.numerator == 0: return "0"
-        elif self.denominator == 1: return f'{self.numerator}'
-        elif self.numerator < 0 and self.denominator < 0: 
-            return f'{abs(self.numerator)}/{abs(self.denominator)}'
+        elif self.denominator == 1: return f'{self.numerator}' 
         return f'{self.numerator}/{self.denominator}'
     
-    # def __add__(self, other: 'Fraction') -> 'Fraction':
-    #     """
-    #     Adds two fractions and returns the result as a new Fraction object.
-    #     
-    #     Parameters
-    #     ----------
-    #     other : Fraction
-    #         The fraction to add.
-    #     
-    #     Returns
-    #     -------
-    #     Fraction
-    #         The result of the addition.
-    #     """
-    #     new_numerator = self.numerator * other.denominator + other.numerator * self.denominator
-    #     new_denominator = self.denominator * other.denominator
-    #     return Fraction(new_numerator, new_denominator)
-    
+    def __add__(self, other: 'Fraction') -> 'Fraction':
+        """
+        Adds two fractions and returns the result as a new Fraction object.
+        
+        Parameters
+        ----------
+        other : Fraction
+            The fraction to add.
+        
+        Returns
+        -------
+        Fraction
+            The result of the addition.
+        """
+        if isinstance(other, Fraction):
+            if self.denominator != other.denominator:
+                new_numerator = self.numerator * other.denominator + other.numerator * self.denominator
+                new_denominator = self.denominator * other.denominator
+            else:
+                new_numerator = self.numerator + other.numerator
+                new_denominator = self.denominator
+            return Fraction(new_numerator, new_denominator, True) 
+        elif isinstance(other, int): 
+            new_numerator = self.numerator + other * self.denominator
+            new_denominator = self.denominator
+            return Fraction(new_numerator, new_denominator, True) 
+        else:
+            raise TypeError("Unsupported operand types for +: 'Fraction' and '{}'".format(type(other).__name__))
     # def __sub__(self, other: 'Fraction') -> 'Fraction':
     #     """
     #     Subtracts one fraction from another and returns the result as a new Fraction object.
@@ -228,15 +237,30 @@ class Fraction:
     #     """
     #     return self.numerator * other.denominator <= self.denominator * other.numerator
     
-    # def simplify(self) -> None:
-    #     """
-    #     Simplifies the fraction to its lowest terms.
-    #
-    #     Example:
-    #     --------
-    #     4/8 becomes 1/2
-    #     """
-    #     pass
+    def simplify(self) -> None:
+        """
+        Simplifies the fraction to its lowest terms.
+    
+        Example:
+        --------
+        4/8 becomes 1/2
+        """
+        
+        if self.numerator < 0 and self.denominator < 0:
+            self.numerator = abs(self.numerator)
+            self.denominator = abs(self.denominator)
+        
+        if self.numerator > 0 and self.denominator < 0:
+            self.denominator = abs(self.denominator)
+            self.numerator = -1 * self.numerator
+            
+        if self.numerator == 0: return
+        
+        divisor = math.gcd(self.numerator, self.denominator)
+        
+        self.numerator = self.numerator // divisor
+        self.denominator = self.denominator // divisor
+        
     
     
     # def reciprocal(self) -> Fraction:

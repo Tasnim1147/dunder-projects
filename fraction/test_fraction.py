@@ -36,10 +36,10 @@ def test_fraction_initialization_zero_denominator():
     Test that initializing a Fraction with a zero denominator raises a ValueError.
     """
 
-    with pytest.raises(ValueError, match="Denominator cannot be zero"):
+    with pytest.raises(ValueError, match=r"Denominator cannot be zero"):
         Fraction(3, 0)
         
-    with pytest.raises(ValueError, match="Denominator cannot be zero"):
+    with pytest.raises(ValueError, match=r"Denominator cannot be zero"):
         Fraction(5, 0)
         
         
@@ -65,12 +65,103 @@ def test_fraction_str_method():
     assert str(frac) == "5"
 
     # Test with fraction where numerator and denominator are negative
-    frac = Fraction(-5, -6)
-    assert str(frac) == "5/6"  # Automatically simplifies to positive fraction
+    frac = Fraction(-5, -6, simplify=True)
+    assert str(frac) == "5/6"  
 
     # Test with denominator equal to -1 (integer representation of negative fraction)
     frac = Fraction(-5, 1)
     assert str(frac) == "-5"
+    
+def test_fraction_add_method():
+    """
+    Test the __add__ method of the Fraction class.
+    """
+
+    # Test with positive fractions
+    frac1 = Fraction(1, 4)
+    frac2 = Fraction(1, 4)
+    result = frac1 + frac2
+    assert result.numerator == 1
+    assert result.denominator == 2  # 1/4 + 1/4 = 2/4 = 1/2
+
+    # Test with negative fractions
+    frac1 = Fraction(-1, 4)
+    frac2 = Fraction(-1, 4)
+    result = frac1 + frac2
+    assert result.numerator == -1
+    assert result.denominator == 2  # -1/4 + -1/4 = -2/4 = -1/2
+
+    # Test with positive and negative fractions
+    frac1 = Fraction(1, 4)
+    frac2 = Fraction(-1, 4)
+    result = frac1 + frac2
+    assert result.numerator == 0
+    assert result.denominator == 4  # 1/4 + -1/4 = 0/4 = 0
+
+    # Test with different denominators
+    frac1 = Fraction(1, 2)
+    frac2 = Fraction(1, 3)
+    result = frac1 + frac2
+    assert result.numerator == 5
+    assert result.denominator == 6  # 1/2 + 1/3 = 3/6 + 2/6 = 5/6
+
+    # Test with integer addition
+    frac1 = Fraction(3, 4)
+    result = frac1 + 2  # Adding integer to fraction
+    assert result.numerator == 11
+    assert result.denominator == 4  # 3/4 + 2 = 3/4 + 8/4 = 11/4
+
+    # Test with reverse addition (integer + fraction)
+    frac1 = Fraction(3, 4)
+    result = frac1 + 2  # Adding fraction to integer
+    assert result.numerator == 11
+    assert result.denominator == 4  # 2 + 3/4 = 8/4 + 3/4 = 11/4
+
+    # Test with zero numerator
+    frac1 = Fraction(0, 4)
+    frac2 = Fraction(1, 4)
+    result = frac1 + frac2
+    assert result.numerator == 1
+    assert result.denominator == 4  # 0/4 + 1/4 = 1/4
+
+    # Test with zero fractions
+    frac1 = Fraction(0, 4)
+    frac2 = Fraction(0, 4)
+    result = frac1 + frac2
+    assert result.numerator == 0
+    assert result.denominator == 4  # 0/4 + 0/4 = 0/4 = 0
+
+    # Test with negative fraction and integer
+    frac1 = Fraction(-1, 4)
+    result = frac1 + 2  # Adding integer to negative fraction
+    assert result.numerator == 7
+    assert result.denominator == 4  # -1/4 + 8/4 = 7/4
+
+    # Test with negative integer and fraction
+    frac1 = Fraction(1, 4)
+    result = frac1 + (-2)  # Adding negative integer to fraction
+    assert result.numerator == -7
+    assert result.denominator == 4  # -2 + 1/4 = -8/4 + 1/4 = -7/4
+
+    # Test with large integers
+    frac1 = Fraction(999999999, 1000000000)
+    frac2 = Fraction(1, 1000000000)
+    result = frac1 + frac2
+    assert result.numerator == 1
+    assert result.denominator == 1  # 999999999/1000000000 + 1/1000000000 = 1000000000/1000000000 = 1
+    
+def test_fraction_add_method_unsupported_types():
+    """
+    Test that adding a non-Fraction/non-int type raises a TypeError with exact message.
+    """
+    frac = Fraction(1, 2)
+    
+    with pytest.raises(TypeError, match=r"Unsupported operand types for \+: 'Fraction' and 'str'"):
+        frac + "test"
+        
+    with pytest.raises(TypeError, match=r"Unsupported operand types for \+: 'Fraction' and 'float'"):
+        frac + 1.0
+
         
 
 # Run the tests
