@@ -599,7 +599,48 @@ def test_fraction_to_decimal_method():
     frac = Fraction(9, 4)
     assert frac.to_decimal() == 2.25  # 9/4 should be 2.25
 
+@pytest.fixture
+def sample_fraction():
+    # Fixture to provide a sample Fraction object for testing
+    return Fraction(3, 5)
 
+def test_fraction_reciprocal_method(sample_fraction):
+    # Test case 1: Basic functionality
+    reciprocal_fraction = sample_fraction.reciprocal()
+    assert reciprocal_fraction.numerator == sample_fraction.denominator
+    assert reciprocal_fraction.denominator == sample_fraction.numerator
+
+    # Test case 2: Reciprocal of a reciprocal should return the original fraction
+    double_reciprocal = reciprocal_fraction.reciprocal()
+    assert double_reciprocal.numerator == sample_fraction.numerator
+    assert double_reciprocal.denominator == sample_fraction.denominator
+
+    # Test case 3: Identity test for original fraction after reciprocal
+    assert sample_fraction.numerator == 3
+    assert sample_fraction.denominator == 5
+
+    # Test case 4: Edge case with large numbers
+    large_fraction = Fraction(987654321, 123456789)
+    large_reciprocal = large_fraction.reciprocal()
+    assert large_reciprocal.numerator == large_fraction.denominator
+    assert large_reciprocal.denominator == large_fraction.numerator
+
+    # Test case 5: Zero numerator and non-zero denominator
+    with pytest.raises(ValueError, match="Denominator cannot be zero"):
+        zero_numerator = Fraction(0, 7)
+        zero_reciprocal = zero_numerator.reciprocal()
+
+    # Test case 7: Negative numerator and positive denominator
+    negative_fraction = Fraction(-4, 9)
+    negative_reciprocal = negative_fraction.reciprocal()
+    assert negative_reciprocal.numerator == 9
+    assert negative_reciprocal.denominator == -4
+
+    # Test case 8: Positive numerator and negative denominator
+    negative_denominator = Fraction(5, -2)
+    negative_denom_reciprocal = negative_denominator.reciprocal()
+    assert negative_denom_reciprocal.numerator == -2
+    assert negative_denom_reciprocal.denominator == 5
 
 # Run the tests
 if __name__ == "__main__":

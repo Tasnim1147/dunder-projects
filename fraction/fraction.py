@@ -269,11 +269,11 @@ class Fraction:
         
     
     
-    # def reciprocal(self) -> Fraction:
-    #     """
-    #     Returns the reciprocal of the fraction.
-    #     """
-    #     pass
+    def reciprocal(self) -> 'Fraction':
+        """
+        Returns the reciprocal of the fraction.
+        """
+        return Fraction(self.denominator, self.numerator, simplify=False)
     
     def to_decimal(self) -> float:
         """
