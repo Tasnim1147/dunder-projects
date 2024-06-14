@@ -20,13 +20,14 @@ class Fraction:
     __str__(self) -> str:
         Returns a string representation of the fraction in the form 'numerator/denominator'.
     
-    Future Methods
-    --------------
     __repr__(self) -> str:
         Returns a string representation of the fraction for debugging purposes.
     
     __add__(self, other: 'Fraction') -> 'Fraction':
-        Adds two fractions and returns the result as a new Fraction object.
+        Adds two fractions (self + other) and returns the result as a new Fraction object.
+        
+    __radd__(self, other: 'Fraction') -> 'Fraction':
+        Adds two fractions (other + self) and returns the result as a new Fraction object.
     
     __sub__(self, other: 'Fraction') -> 'Fraction':
         Subtracts one fraction from another and returns the result as a new Fraction object.
@@ -55,8 +56,6 @@ class Fraction:
     from_decimal(cls, decimal: float) -> 'Fraction':
         Class method to create a Fraction object from a decimal.
     
-    gcd(a: int, b: int) -> int:
-        Static method to calculate the greatest common divisor (GCD) of two numbers.
     """
 
     def __init__(self, a: int, b: int, simplify: bool = False) -> None:
@@ -135,6 +134,22 @@ class Fraction:
             return Fraction(new_numerator, new_denominator, True) 
         else:
             raise TypeError("Unsupported operand types for +: 'Fraction' and '{}'".format(type(other).__name__))
+        
+    def __radd__(self, other: 'Fraction') -> 'Fraction':
+        """
+        Adds two fractions (other + self) and returns the result as a new Fraction object.
+        
+        Parameters
+        ----------
+        other : Fraction
+            The fraction to add.
+        
+        Returns
+        -------
+        Fraction
+            The result of the addition.
+        """
+        return self.__add__(other)
         
     def __sub__(self, other: 'Fraction') -> 'Fraction':
         """
