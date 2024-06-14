@@ -275,13 +275,13 @@ class Fraction:
     #     """
     #     pass
     
-    # def to_decimal(self) -> float:
-    #     """
-    #     Converts the fraction to its decimal representation.
-    #
-    #     Returns:
-    #     --------
-    #     float
-    #         The decimal representation of the fraction.
-    #     """
-    #     pass
+    def to_decimal(self) -> float:
+        """
+        Converts the fraction to its decimal representation.
+    
+        Returns:
+        --------
+        float
+            The decimal representation of the fraction.
+        """
+        return self.numerator / self.denominator

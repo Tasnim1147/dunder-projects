@@ -558,6 +558,47 @@ def test_fraction_simplify_method():
     assert frac.numerator == 1
     assert frac.denominator == 2  # 1000000/2000000 simplifies to 1/2
 
+def test_fraction_to_decimal_method():
+    """
+    Test the to_decimal method of the Fraction class.
+    """
+
+    # Test converting a simple fraction to decimal
+    frac = Fraction(1, 2)
+    assert frac.to_decimal() == 0.5  # 1/2 should be 0.5
+
+    # Test converting a negative fraction to decimal
+    frac = Fraction(-1, 2)
+    assert frac.to_decimal() == -0.5  # -1/2 should be -0.5
+
+    # Test converting a fraction with a negative denominator to decimal
+    frac = Fraction(1, -2)
+    assert frac.to_decimal() == -0.5  # 1/-2 should be -0.5
+
+    # Test converting a fraction with both negative numerator and denominator to decimal
+    frac = Fraction(-1, -2)
+    assert frac.to_decimal() == 0.5  # -1/-2 should be 0.5
+
+    # Test converting a fraction with zero numerator to decimal
+    frac = Fraction(0, 5)
+    assert frac.to_decimal() == 0.0  # 0/5 should be 0.0
+
+    # Test converting a whole number fraction to decimal
+    frac = Fraction(4, 2)
+    assert frac.to_decimal() == 2.0  # 4/2 should be 2.0
+
+    # Test converting a large fraction to decimal
+    frac = Fraction(1000000, 2000000)
+    assert frac.to_decimal() == 0.5  # 1000000/2000000 should be 0.5
+
+    # Test converting an improper fraction to decimal
+    frac = Fraction(7, 3)
+    assert frac.to_decimal() == 7 / 3  # 7/3 should be 7/3 (or 2.333...)
+
+    # Test converting a fraction to decimal where numerator is greater than denominator
+    frac = Fraction(9, 4)
+    assert frac.to_decimal() == 2.25  # 9/4 should be 2.25
+
 
 
 # Run the tests
