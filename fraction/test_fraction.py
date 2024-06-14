@@ -282,7 +282,64 @@ def test_fraction_mul_method():
     assert result.denominator == 3000000003  # 1000000000/1000000001 * 2/3 = 2000000000/3000000003
 
 
-        
+def test_fraction_truediv_method():
+    """
+    Test the __truediv__ method of the Fraction class.
+    """
+
+    # Test with positive fractions
+    frac1 = Fraction(1, 2)
+    frac2 = Fraction(2, 3)
+    result = frac1 / frac2
+    assert result.numerator == 3
+    assert result.denominator == 4  # 1/2 / 2/3 = 1/2 * 3/2 = 3/4
+
+    # Test with negative fractions
+    frac1 = Fraction(-1, 2)
+    frac2 = Fraction(2, 3)
+    result = frac1 / frac2
+    assert result.numerator == -3
+    assert result.denominator == 4  # -1/2 / 2/3 = -1/2 * 3/2 = -3/4
+
+    # Test with positive and negative fractions
+    frac1 = Fraction(1, 2)
+    frac2 = Fraction(-2, 3)
+    result = frac1 / frac2
+    assert result.numerator == -3
+    assert result.denominator == 4  # 1/2 / -2/3 = 1/2 * -3/2 = -3/4
+
+    # Test with integer division
+    frac1 = Fraction(3, 4)
+    result = frac1 / 2
+    assert result.numerator == 3
+    assert result.denominator == 8  # 3/4 / 2 = 3/4 * 1/2 = 3/8
+
+    # Test with zero numerator
+    frac1 = Fraction(0, 4)
+    frac2 = Fraction(1, 4)
+    result = frac1 / frac2
+    assert result.numerator == 0
+    assert result.denominator == 1  # 0/4 / 1/4 = 0
+
+    # Test with zero fractions
+    frac1 = Fraction(0, 4)
+    frac2 = Fraction(0, 4)
+    with pytest.raises(ValueError, match=r"Denominator cannot be zero"):
+        result = frac1 / frac2  # 0/4 / 0/4 should raise ZeroDivisionError
+
+    # Test with negative fraction and integer
+    frac1 = Fraction(-1, 4)
+    result = frac1 / 2
+    assert result.numerator == -1
+    assert result.denominator == 8  # -1/4 / 2 = -1/4 * 1/2 = -1/8
+
+    # Test with large integers
+    frac1 = Fraction(1000000000, 1000000001)
+    frac2 = Fraction(2, 3)
+    result = frac1 / frac2
+    assert result.numerator == 1500000000
+    assert result.denominator == 1000000001  # 1000000000/1000000001 / 2/3 = 1000000000/1000000001 * 3/2 = 3000000000/2000000002 = 1500000000/1000000001
+
 
 # Run the tests
 if __name__ == "__main__":

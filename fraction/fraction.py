@@ -175,23 +175,23 @@ class Fraction:
         new_denominator = self.denominator * other.denominator
         return Fraction(new_numerator, new_denominator, True)
     
-    # def __truediv__(self, other: 'Fraction') -> 'Fraction':
-    #     """
-    #     Divides one fraction by another and returns the result as a new Fraction object.
-    #     
-    #     Parameters
-    #     ----------
-    #     other : Fraction
-    #         The fraction to divide by.
-    #     
-    #     Returns
-    #     -------
-    #     Fraction
-    #         The result of the division.
-    #     """
-    #     new_numerator = self.numerator * other.denominator
-    #     new_denominator = self.denominator * other.numerator
-    #     return Fraction(new_numerator, new_denominator)
+    def __truediv__(self, other: 'Fraction') -> 'Fraction':
+        """
+        Divides one fraction by another and returns the result as a new Fraction object.
+        
+        Parameters
+        ----------
+        other : Fraction
+            The fraction to divide by.
+        
+        Returns
+        -------
+        Fraction
+            The result of the division.
+        """
+        new_numerator = self.numerator * other.denominator
+        new_denominator = self.denominator * other.numerator
+        return Fraction(new_numerator, new_denominator, True)
     
     # def __eq__(self, other: 'Fraction') -> bool:
     #     """
