@@ -96,7 +96,7 @@ def test_fraction_add_method():
     frac2 = Fraction(-1, 4)
     result = frac1 + frac2
     assert result.numerator == 0
-    assert result.denominator == 4  # 1/4 + -1/4 = 0/4 = 0
+    assert result.denominator == 1  # 1/4 + -1/4 = 0/4 = 0
 
     # Test with different denominators
     frac1 = Fraction(1, 2)
@@ -123,7 +123,7 @@ def test_fraction_add_method():
     frac2 = Fraction(0, 4)
     result = frac1 + frac2
     assert result.numerator == 0
-    assert result.denominator == 4  # 0/4 + 0/4 = 0/4 = 0
+    assert result.denominator == 1  # 0/4 + 0/4 = 0/1 = 0
 
     # Test with negative fraction and integer
     frac1 = Fraction(-1, 4)
@@ -207,7 +207,7 @@ def test_fraction_sub_method():
     frac2 = Fraction(0, 4)
     result = frac1 - frac2
     assert result.numerator == 0
-    assert result.denominator == 4  # 0/4 - 0/4 = 0/4 = 0
+    assert result.denominator == 1  # 0/4 - 0/4 = 0/4 = 0
 
     # Test with negative fraction and integer
     frac1 = Fraction(-1, 4)
@@ -221,6 +221,66 @@ def test_fraction_sub_method():
     result = frac1 - frac2
     assert result.numerator == 999999999
     assert result.denominator == 1000000001  
+    
+def test_fraction_mul_method():
+    """
+    Test the __mul__ method of the Fraction class.
+    """
+
+    # Test with positive fractions
+    frac1 = Fraction(1, 2)
+    frac2 = Fraction(2, 3)
+    result = frac1 * frac2
+    assert result.numerator == 1
+    assert result.denominator == 3  # 1/2 * 2/3 = 2/6 = 1/3
+
+    # Test with negative fractions
+    frac1 = Fraction(-1, 2)
+    frac2 = Fraction(2, 3)
+    result = frac1 * frac2
+    assert result.numerator == -1
+    assert result.denominator == 3  # -1/2 * 2/3 = -2/6 = -1/3
+
+    # Test with positive and negative fractions
+    frac1 = Fraction(1, 2)
+    frac2 = Fraction(-2, 3)
+    result = frac1 * frac2
+    assert result.numerator == -1
+    assert result.denominator == 3  # 1/2 * -2/3 = -2/6 = -1/3
+
+    # Test with integer multiplication
+    frac1 = Fraction(3, 4)
+    result = frac1 * 2
+    assert result.numerator == 3
+    assert result.denominator == 2  # 3/4 * 2 = 6/4 = 3/2
+
+    # Test with zero numerator
+    frac1 = Fraction(0, 4)
+    frac2 = Fraction(1, 4)
+    result = frac1 * frac2
+    assert result.numerator == 0
+    assert result.denominator == 1  # 0/4 * 1/4 = 0
+
+    # Test with zero fractions
+    frac1 = Fraction(0, 4)
+    frac2 = Fraction(0, 4)
+    result = frac1 * frac2
+    assert result.numerator == 0
+    assert result.denominator == 1  # 0/4 * 0/4 = 0
+
+    # Test with negative fraction and integer
+    frac1 = Fraction(-1, 4)
+    result = frac1 * 2
+    assert result.numerator == -1
+    assert result.denominator == 2  # -1/4 * 2 = -2/4 = -1/2
+
+    # Test with large integers
+    frac1 = Fraction(1000000000, 1000000001)
+    frac2 = Fraction(2, 3)
+    result = frac1 * frac2
+    assert result.numerator == 2000000000
+    assert result.denominator == 3000000003  # 1000000000/1000000001 * 2/3 = 2000000000/3000000003
+
 
         
 

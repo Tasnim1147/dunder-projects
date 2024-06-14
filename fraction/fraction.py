@@ -157,23 +157,23 @@ class Fraction:
         else: new_denominator = self.denominator * other.denominator
         return Fraction(new_numerator, new_denominator, True)
     
-    # def __mul__(self, other: 'Fraction') -> 'Fraction':
-    #     """
-    #     Multiplies two fractions and returns the result as a new Fraction object.
-    #     
-    #     Parameters
-    #     ----------
-    #     other : Fraction
-    #         The fraction to multiply.
-    #     
-    #     Returns
-    #     -------
-    #     Fraction
-    #         The result of the multiplication.
-    #     """
-    #     new_numerator = self.numerator * other.numerator
-    #     new_denominator = self.denominator * other.denominator
-    #     return Fraction(new_numerator, new_denominator)
+    def __mul__(self, other: 'Fraction') -> 'Fraction':
+        """
+        Multiplies two fractions and returns the result as a new Fraction object.
+        
+        Parameters
+        ----------
+        other : Fraction
+            The fraction to multiply.
+        
+        Returns
+        -------
+        Fraction
+            The result of the multiplication.
+        """
+        new_numerator = self.numerator * other.numerator
+        new_denominator = self.denominator * other.denominator
+        return Fraction(new_numerator, new_denominator, True)
     
     # def __truediv__(self, other: 'Fraction') -> 'Fraction':
     #     """
@@ -258,7 +258,9 @@ class Fraction:
             self.denominator = abs(self.denominator)
             self.numerator = -1 * self.numerator
             
-        if self.numerator == 0: return
+        if self.numerator == 0: 
+            self.denominator = 1
+            return
         
         divisor = math.gcd(self.numerator, self.denominator)
         
