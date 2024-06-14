@@ -42,6 +42,36 @@ def test_fraction_initialization_zero_denominator():
     with pytest.raises(ValueError, match="Denominator cannot be zero"):
         Fraction(5, 0)
         
+        
+def test_fraction_str_method():
+    """
+    Test the __str__ method of the Fraction class.
+    """
+
+    # Test with positive fraction
+    frac = Fraction(1, 2)
+    assert str(frac) == "1/2"
+
+    # Test with negative fraction
+    frac = Fraction(-3, 4)
+    assert str(frac) == "-3/4"
+
+    # Test with zero numerator
+    frac = Fraction(0, 7)
+    assert str(frac) == "0"
+
+    # Test with denominator equal to 1 (integer representation)
+    frac = Fraction(5, 1)
+    assert str(frac) == "5"
+
+    # Test with fraction where numerator and denominator are negative
+    frac = Fraction(-5, -6)
+    assert str(frac) == "5/6"  # Automatically simplifies to positive fraction
+
+    # Test with denominator equal to -1 (integer representation of negative fraction)
+    frac = Fraction(-5, 1)
+    assert str(frac) == "-5"
+        
 
 # Run the tests
 if __name__ == "__main__":

@@ -1,3 +1,6 @@
+import math
+
+
 class Fraction:
     """
     A class to represent a fraction with a numerator and a denominator.
@@ -77,28 +80,33 @@ class Fraction:
         self.numerator = a 
         self.denominator = b
         
-    # def __str__(self) -> str:
-    #     """
-    #     Returns a string representation of the fraction.
+    def __str__(self) -> str:
+        """
+        Returns a string representation of the fraction.
         
-    #     Returns
-    #     -------
-    #     str
-    #         A string in the form 'numerator/denominator'.
-    #     """
-    #     return f'{self.numerator}/{self.denominator}'
+        Returns
+        -------
+        str
+            A string in the form 'numerator/denominator'.
+        """
+        return self.__repr__()
+        
     
     # Future Methods:
-    # def __repr__(self) -> str:
-    #     """
-    #     Returns a string representation of the fraction for debugging purposes.
-    #     
-    #     Returns
-    #     -------
-    #     str
-    #         A string representation for debugging.
-    #     """
-    #     return f'Fraction({self.numerator}, {self.denominator})'
+    def __repr__(self) -> str:
+        """
+        Returns a string representation of the fraction for debugging purposes.
+        
+        Returns
+        -------
+        str
+            A string representation for debugging.
+        """
+        if self.numerator == 0: return "0"
+        elif self.denominator == 1: return f'{self.numerator}'
+        elif self.numerator < 0 and self.denominator < 0: 
+            return f'{abs(self.numerator)}/{abs(self.denominator)}'
+        return f'{self.numerator}/{self.denominator}'
     
     # def __add__(self, other: 'Fraction') -> 'Fraction':
     #     """
