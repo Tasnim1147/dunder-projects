@@ -641,6 +641,33 @@ def test_fraction_reciprocal_method(sample_fraction):
     negative_denom_reciprocal = negative_denominator.reciprocal()
     assert negative_denom_reciprocal.numerator == -2
     assert negative_denom_reciprocal.denominator == 5
+    
+def test_fraction_from_decimal_method():
+    # Test case 1: Basic functionality with default precision
+    fraction = Fraction.from_decimal(0.5)
+    assert fraction.numerator == 1
+    assert fraction.denominator == 2
+
+    # Test case 2: Higher precision for accuracy
+    fraction_precise = Fraction.from_decimal(0.123456789, precision=9)
+    assert fraction_precise.numerator == 123456789
+    assert fraction_precise.denominator == 1000000000
+
+    # Test case 3: Negative decimal number
+    negative_fraction = Fraction.from_decimal(-0.75)
+    assert negative_fraction.numerator == -7
+    assert negative_fraction.denominator == 10
+
+    # Test case 4: Zero decimal number
+    zero_fraction = Fraction.from_decimal(0.0)
+    assert zero_fraction.numerator == 0
+    assert zero_fraction.denominator == 1
+
+    # Test case 5: Decimal number with very high precision
+    high_precision_fraction = Fraction.from_decimal(0.1234567890123456789, precision=18)
+    assert high_precision_fraction.numerator == 1543209862654321
+    assert high_precision_fraction.denominator == 12500000000000000
+
 
 # Run the tests
 if __name__ == "__main__":

@@ -283,5 +283,41 @@ class Fraction:
         --------
         float
             The decimal representation of the fraction.
+            
+        Example:
+        --------
+        1/2 returns 0.5
         """
         return self.numerator / self.denominator
+    
+    @classmethod
+    def from_decimal(cls, decimal: float, precision: int = 1) -> 'Fraction':
+        """
+        Creates a Fraction object from a floating-point decimal number.
+    
+        Parameters
+        ----------
+        decimal : float
+            The decimal number to convert into a Fraction object.
+        precision : int, optional
+            The precision to use during conversion (default is 1).
+        
+        Returns
+        -------
+        Fraction
+            A new Fraction object representing the equivalent fraction of the decimal.
+        
+        Notes
+        -----
+        The `precision` parameter determines the number of decimal places to consider
+        during conversion. Increasing precision may lead to a more accurate Fraction
+        representation, but may not eliminate floating-point approximation completely.
+        """
+        numerator = int(decimal * (10 ** precision))
+        denominator = 10 ** precision
+        return cls(numerator, denominator, simplify=True)
+    
+    
+    
+    
+        
