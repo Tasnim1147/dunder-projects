@@ -341,6 +341,66 @@ def test_fraction_truediv_method():
     assert result.denominator == 1000000001  # 1000000000/1000000001 / 2/3 = 1000000000/1000000001 * 3/2 = 3000000000/2000000002 = 1500000000/1000000001
 
 
+def test_fraction_eq_method():
+    """
+    Test the __eq__ method of the Fraction class.
+    """
+
+    # Test equality of fractions with the same numerator and denominator
+    frac1 = Fraction(1, 2)
+    frac2 = Fraction(1, 2)
+    assert frac1 == frac2  # 1/2 == 1/2
+
+    # Test equality of fractions with different numerators and denominators but equivalent values
+    frac1 = Fraction(2, 4)
+    frac2 = Fraction(1, 2)
+    assert frac1 == frac2  # 2/4 == 1/2
+
+    # Test equality with fractions that reduce to the same value
+    frac1 = Fraction(3, 9)
+    frac2 = Fraction(1, 3)
+    assert frac1 == frac2  # 3/9 == 1/3
+
+    # Test equality with negative fractions
+    frac1 = Fraction(-1, 2)
+    frac2 = Fraction(1, -2)
+    assert frac1 == frac2  # -1/2 == 1/-2
+
+    # Test inequality with different fractions
+    frac1 = Fraction(1, 2)
+    frac2 = Fraction(2, 3)
+    assert frac1 != frac2  # 1/2 != 2/3
+
+    # Test equality with zero fractions
+    frac1 = Fraction(0, 1)
+    frac2 = Fraction(0, 5)
+    assert frac1 == frac2  # 0/1 == 0/5
+
+    # Test inequality with zero numerator and non-zero numerator
+    frac1 = Fraction(0, 1)
+    frac2 = Fraction(1, 5)
+    assert frac1 != frac2  # 0/1 != 1/5
+
+    # Test equality with integer comparison
+    frac1 = Fraction(4, 2)
+    assert frac1 == 2  # 4/2 == 2
+
+    # Test inequality with integer comparison
+    frac1 = Fraction(3, 2)
+    assert frac1 != 2  # 3/2 != 2
+
+    # Test equality with large fractions
+    frac1 = Fraction(1000000000, 2000000000)
+    frac2 = Fraction(1, 2)
+    assert frac1 == frac2  # 1000000000/2000000000 == 1/2
+
+    # Test inequality with large fractions
+    frac1 = Fraction(1000000000, 2000000000)
+    frac2 = Fraction(2, 3)
+    assert frac1 != frac2  # 1000000000/2000000000 != 2/3
+    
+
+
 # Run the tests
 if __name__ == "__main__":
     pytest.main()

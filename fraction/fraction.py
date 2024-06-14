@@ -193,21 +193,21 @@ class Fraction:
         new_denominator = self.denominator * other.numerator
         return Fraction(new_numerator, new_denominator, True)
     
-    # def __eq__(self, other: 'Fraction') -> bool:
-    #     """
-    #     Checks if two fractions are equal.
-    #     
-    #     Parameters
-    #     ----------
-    #     other : Fraction
-    #         The fraction to compare.
-    #     
-    #     Returns
-    #     -------
-    #     bool
-    #         True if the fractions are equal, False otherwise.
-    #     """
-    #     return self.numerator * other.denominator == self.denominator * other.numerator
+    def __eq__(self, other: 'Fraction') -> bool:
+        """
+        Checks if two fractions are equal.
+        
+        Parameters
+        ----------
+        other : Fraction
+            The fraction to compare.
+        
+        Returns
+        -------
+        bool
+            True if the fractions are equal, False otherwise.
+        """
+        return self.numerator * other.denominator == self.denominator * other.numerator
     
     # def __lt__(self, other: 'Fraction') -> bool:
     #     """
