@@ -452,6 +452,58 @@ def test_fraction_lt_method():
     frac2 = Fraction(1, 2)
     assert frac1 < frac2  # 1000000000/3000000000 < 1/2
 
+def test_fraction_le_method():
+    """
+    Test the __le__ method of the Fraction class.
+    """
+
+    # Test with positive fractions
+    frac1 = Fraction(1, 2)
+    frac2 = Fraction(2, 3)
+    assert frac1 <= frac2  # 1/2 <= 2/3
+
+    # Test with negative fractions
+    frac1 = Fraction(-1, 2)
+    frac2 = Fraction(2, 3)
+    assert frac1 <= frac2  # -1/2 <= 2/3
+
+    # Test with positive and negative fractions
+    frac1 = Fraction(1, 2)
+    frac2 = Fraction(-2, 3)
+    assert not frac1 <= frac2  # 1/2 is not <= -2/3
+
+    # Test with fractions having the same value
+    frac1 = Fraction(1, 2)
+    frac2 = Fraction(2, 4)
+    assert frac1 <= frac2  # 1/2 <= 2/4
+
+    # Test with zero numerator
+    frac1 = Fraction(0, 1)
+    frac2 = Fraction(1, 4)
+    assert frac1 <= frac2  # 0/1 <= 1/4
+
+    # Test with both fractions having zero numerator
+    frac1 = Fraction(0, 4)
+    frac2 = Fraction(0, 5)
+    assert frac1 <= frac2  # 0/4 <= 0/5
+
+    # Test with integer comparison
+    frac1 = Fraction(1, 2)
+    assert frac1 <= 1  # 1/2 <= 1
+
+    # Test with reverse integer comparison
+    frac1 = Fraction(3, 2)
+    assert not frac1 <= 1  # 3/2 is not <= 1
+
+    # Test with large fractions
+    frac1 = Fraction(1000000000, 2000000000)
+    frac2 = Fraction(1, 2)
+    assert frac1 <= frac2  # 1000000000/2000000000 <= 1/2
+
+    # Test with unequal large fractions
+    frac1 = Fraction(1000000000, 3000000000)
+    frac2 = Fraction(1, 2)
+    assert frac1 <= frac2  # 1000000000/3000000000 <= 1/2
 
 
 

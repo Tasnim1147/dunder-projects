@@ -225,21 +225,21 @@ class Fraction:
         """
         return self.numerator * other.denominator < self.denominator * other.numerator
     
-    # def __le__(self, other: 'Fraction') -> bool:
-    #     """
-    #     Checks if one fraction is less than or equal to another.
-    #     
-    #     Parameters
-    #     ----------
-    #     other : Fraction
-    #         The fraction to compare.
-    #     
-    #     Returns
-    #     -------
-    #     bool
-    #         True if this fraction is less than or equal to the other fraction, False otherwise.
-    #     """
-    #     return self.numerator * other.denominator <= self.denominator * other.numerator
+    def __le__(self, other: 'Fraction') -> bool:
+        """
+        Checks if one fraction is less than or equal to another.
+        
+        Parameters
+        ----------
+        other : Fraction
+            The fraction to compare.
+        
+        Returns
+        -------
+        bool
+            True if this fraction is less than or equal to the other fraction, False otherwise.
+        """
+        return self.numerator * other.denominator <= self.denominator * other.numerator
     
     def simplify(self) -> None:
         """
