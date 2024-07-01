@@ -230,6 +230,12 @@ class Fraction:
         new_denominator = self.denominator * other.numerator
         return Fraction(new_numerator, new_denominator, True)
     
+    def __itruediv__(self, other: 'Fraction') -> 'Fraction':
+        _temp = self.__truediv__(other)
+        self.numerator = _temp.numerator
+        self.denominator = _temp.denominator
+        return self
+    
     def __eq__(self, other: 'Fraction') -> bool:
         """
         Checks if two fractions are equal.
