@@ -260,6 +260,9 @@ class Fraction:
     def __abs__(self) -> 'Fraction':
         return Fraction(abs(self.numerator), abs(self.denominator))
     
+    def __floor__(self) -> int:
+        return Fraction(math.floor(self.to_decimal()), 1)
+    
     def simplify(self) -> None:
         """
         Simplifies the fraction to its lowest terms.

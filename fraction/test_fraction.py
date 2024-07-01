@@ -1,4 +1,5 @@
 import pytest
+import math
 from fraction import Fraction
 
 def test_fraction_initialization():
@@ -682,7 +683,44 @@ def test_fraction_abs_method():
     assert p_negative_fraction.denominator == 7
     assert p_negative_fraction.numerator == 3
     
-    
+def test_fraction_floor_method():
+    # Test case 1: Positive fraction
+    positive_fraction = Fraction(7, 3)
+    assert math.floor(positive_fraction) == Fraction(2, 1)
+
+    # Test case 2: Negative fraction
+    negative_fraction = Fraction(-7, 3)
+    assert math.floor(negative_fraction) == Fraction(-3, 1)
+
+    # Test case 3: Fraction resulting in zero
+    zero_fraction = Fraction(1, 3)
+    assert math.floor(zero_fraction) == Fraction(0, 1)
+
+    # Test case 4: Fraction equal to an integer
+    integer_fraction = Fraction(6, 2)
+    assert math.floor(integer_fraction) == Fraction(3, 1)
+
+    # Test case 5: Small positive fraction
+    small_positive_fraction = Fraction(1, 10)
+    assert math.floor(small_positive_fraction) == Fraction(0, 1)
+
+    # Test case 6: Small negative fraction
+    small_negative_fraction = Fraction(-1, 10)
+    assert math.floor(small_negative_fraction) == Fraction(-1, 1)
+
+    # Test case 7: Large positive fraction
+    large_positive_fraction = Fraction(123456789, 1000000)
+    assert math.floor(large_positive_fraction) == Fraction(123, 1)
+
+    # Test case 8: Large negative fraction
+    large_negative_fraction = Fraction(-123456789, 1000000)
+    assert math.floor(large_negative_fraction) == Fraction(-124, 1)
+
+
+
+
+
+
 
 # Run the tests
 if __name__ == "__main__":
