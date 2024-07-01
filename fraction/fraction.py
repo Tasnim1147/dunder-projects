@@ -179,6 +179,14 @@ class Fraction:
         else: new_denominator = self.denominator * other.denominator
         return Fraction(new_numerator, new_denominator, True)
     
+    
+    def __isub__(self, other: 'Fraction') -> 'Fraction':
+        _temp = self.__sub__(other)
+        self.numerator = _temp.numerator
+        self.denominator = _temp.denominator
+        return self
+        
+    
     def __mul__(self, other: 'Fraction') -> 'Fraction':
         """
         Multiplies two fractions and returns the result as a new Fraction object.
