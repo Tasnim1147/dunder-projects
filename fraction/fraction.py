@@ -135,6 +135,13 @@ class Fraction:
         else:
             raise TypeError("Unsupported operand types for +: 'Fraction' and '{}'".format(type(other).__name__))
         
+    def __iadd__(self, other: 'Fraction') -> 'Fraction':
+        _temp = self.__add__(other)
+        self.numerator = _temp.numerator
+        self.denominator = _temp.denominator
+        self.simplify()
+        return self
+        
     def __radd__(self, other: 'Fraction') -> 'Fraction':
         """
         Adds two fractions (other + self) and returns the result as a new Fraction object.
