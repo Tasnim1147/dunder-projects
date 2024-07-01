@@ -239,6 +239,12 @@ class Fraction:
     def __pow__(self, other: int) -> 'Fraction':
         return Fraction(self.numerator ** other, self.denominator ** other)
     
+    def __ipow__(self, other: int) -> 'Fraction':
+        _temp = self ** other 
+        self.numerator = _temp.numerator
+        self.denominator = _temp.denominator
+        return self
+    
     def __eq__(self, other: 'Fraction') -> bool:
         """
         Checks if two fractions are equal.

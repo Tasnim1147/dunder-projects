@@ -1081,6 +1081,68 @@ def test_fraction_pow_method():
     assert result == Fraction(1024, 59049)
 
 
+def test_fraction_ipow_method():
+    # Test case 1: Positive exponent
+    x = Fraction(2, 3)
+    y = 3
+    x **= y
+    assert x == Fraction(8, 27)
+
+    # Test case 2: Negative exponent
+    x = Fraction(2, 3)
+    y = -2
+    x **= y
+    assert x == Fraction(9, 4)
+
+    # Test case 3: Zero exponent
+    x = Fraction(2, 3)
+    y = 0
+    x **= y
+    assert x == Fraction(1, 1)
+
+    # Test case 4: Fractional base with positive integer exponent
+    x = Fraction(3, 4)
+    y = 2
+    x **= y
+    assert x == Fraction(9, 16)
+
+    # Test case 5: Fractional base with negative integer exponent
+    x = Fraction(3, 4)
+    y = -2
+    x **= y
+    assert x == Fraction(16, 9)
+
+    # Test case 6: Integer base with positive exponent
+    x = Fraction(5, 1)  # Equivalent to integer 5
+    y = 3
+    x **= y
+    assert x == Fraction(125, 1)
+
+    # Test case 7: Integer base with negative exponent
+    x = Fraction(5, 1)  # Equivalent to integer 5
+    y = -1
+    x **= y
+    assert x == Fraction(1, 5)
+
+    # Test case 8: Zero base with positive exponent
+    x = Fraction(0, 1)
+    y = 5
+    x **= y
+    assert x == Fraction(0, 1)
+
+    # Test case 9: Zero base with zero exponent (should be 1)
+    x = Fraction(0, 1)
+    y = 0
+    x **= y
+    assert x == Fraction(1, 1)
+
+    # Test case 10: Large exponent
+    x = Fraction(2, 3)
+    y = 10
+    x **= y
+    assert x == Fraction(1024, 59049)
+
+
 # Run the tests
 if __name__ == "__main__":
     pytest.main()
