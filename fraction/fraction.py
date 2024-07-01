@@ -266,6 +266,9 @@ class Fraction:
     def __ceil__(self) -> 'Fraction':
         return Fraction(math.ceil(self.to_decimal()), 1)
     
+    def __round__(self) -> 'Fraction':
+        return Fraction(round(self.to_decimal()), 1)
+    
     def simplify(self) -> None:
         """
         Simplifies the fraction to its lowest terms.

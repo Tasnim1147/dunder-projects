@@ -751,6 +751,55 @@ def test_fraction_ceil_method():
     large_negative_fraction = Fraction(-123456789, 1000000)
     assert math.ceil(large_negative_fraction) == Fraction(-123, 1)
 
+def test_fraction_round_method():
+    # Test case 1: Positive fraction rounding down
+    positive_fraction_down = Fraction(7, 3)
+    assert round(positive_fraction_down) == Fraction(2, 1)
+
+    # Test case 2: Positive fraction rounding up
+    positive_fraction_up = Fraction(8, 3)
+    assert round(positive_fraction_up) == Fraction(3, 1)
+
+    # Test case 3: Negative fraction rounding down
+    negative_fraction_down = Fraction(-7, 3)
+    assert round(negative_fraction_down) == Fraction(-2, 1)
+
+    # Test case 4: Negative fraction rounding up
+    negative_fraction_up = Fraction(-8, 3)
+    assert round(negative_fraction_up) == Fraction(-3, 1)
+
+    # Test case 5: Fraction resulting in zero
+    zero_fraction = Fraction(1, 3)
+    assert round(zero_fraction) == Fraction(0, 1)
+
+    # Test case 6: Fraction equal to an integer
+    integer_fraction = Fraction(6, 2)
+    assert round(integer_fraction) == Fraction(3, 1)
+
+    # Test case 7: Small positive fraction
+    small_positive_fraction = Fraction(1, 10)
+    assert round(small_positive_fraction) == Fraction(0, 1)
+
+    # Test case 8: Small negative fraction
+    small_negative_fraction = Fraction(-1, 10)
+    assert round(small_negative_fraction) == Fraction(0, 1)
+
+    # Test case 9: Large positive fraction rounding down
+    large_positive_fraction_down = Fraction(123456789, 1000000)
+    assert round(large_positive_fraction_down) == Fraction(123, 1)
+
+    # Test case 10: Large positive fraction rounding up
+    large_positive_fraction_up = Fraction(123500000, 1000000)
+    assert round(large_positive_fraction_up) == Fraction(124, 1)
+
+    # Test case 11: Large negative fraction rounding down
+    large_negative_fraction_down = Fraction(-123456789, 1000000)
+    assert round(large_negative_fraction_down) == Fraction(-123, 1)
+
+    # Test case 12: Large negative fraction rounding up
+    large_negative_fraction_up = Fraction(-123500000, 1000000)
+    assert round(large_negative_fraction_up) == Fraction(-124, 1)
+
 
 
 
