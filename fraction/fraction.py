@@ -260,8 +260,11 @@ class Fraction:
     def __abs__(self) -> 'Fraction':
         return Fraction(abs(self.numerator), abs(self.denominator))
     
-    def __floor__(self) -> int:
+    def __floor__(self) -> 'Fraction':
         return Fraction(math.floor(self.to_decimal()), 1)
+    
+    def __ceil__(self) -> 'Fraction':
+        return Fraction(math.ceil(self.to_decimal()), 1)
     
     def simplify(self) -> None:
         """

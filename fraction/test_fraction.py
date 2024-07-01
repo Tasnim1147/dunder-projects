@@ -718,6 +718,38 @@ def test_fraction_floor_method():
 
 
 
+def test_fraction_ceil_method():
+    # Test case 1: Positive fraction
+    positive_fraction = Fraction(7, 3)
+    assert math.ceil(positive_fraction) == Fraction(3, 1)
+
+    # Test case 2: Negative fraction
+    negative_fraction = Fraction(-7, 3)
+    assert math.ceil(negative_fraction) == Fraction(-2, 1)
+
+    # Test case 3: Fraction resulting in zero
+    zero_fraction = Fraction(1, 3)
+    assert math.ceil(zero_fraction) == Fraction(1, 1)
+
+    # Test case 4: Fraction equal to an integer
+    integer_fraction = Fraction(6, 2)
+    assert math.ceil(integer_fraction) == Fraction(3, 1)
+
+    # Test case 5: Small positive fraction
+    small_positive_fraction = Fraction(1, 10)
+    assert math.ceil(small_positive_fraction) == Fraction(1, 1)
+
+    # Test case 6: Small negative fraction
+    small_negative_fraction = Fraction(-1, 10)
+    assert math.ceil(small_negative_fraction) == Fraction(0, 1)
+
+    # Test case 7: Large positive fraction
+    large_positive_fraction = Fraction(123456789, 1000000)
+    assert math.ceil(large_positive_fraction) == Fraction(124, 1)
+
+    # Test case 8: Large negative fraction
+    large_negative_fraction = Fraction(-123456789, 1000000)
+    assert math.ceil(large_negative_fraction) == Fraction(-123, 1)
 
 
 
