@@ -205,6 +205,13 @@ class Fraction:
         new_denominator = self.denominator * other.denominator
         return Fraction(new_numerator, new_denominator, True)
     
+    def __imul__(self, other: 'Fraction') -> 'Fraction':
+        _temp = self.__mul__(other)
+        self.numerator = _temp.numerator
+        self.denominator = _temp.denominator
+        return self
+    
+    
     def __truediv__(self, other: 'Fraction') -> 'Fraction':
         """
         Divides one fraction by another and returns the result as a new Fraction object.

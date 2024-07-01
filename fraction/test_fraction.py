@@ -914,6 +914,58 @@ def test_fraction_isub_method():
     assert x == Fraction(expected_numerator, expected_denominator, True)
 
 
+def test_fraction_imul_method():
+    # Test case 1: Positive fractions
+    x = Fraction(1, 2)
+    y = Fraction(2, 3)
+    x *= y
+    assert x == Fraction(1, 3)
+
+    # Test case 2: Negative fractions
+    x = Fraction(-1, 2)
+    y = Fraction(-2, 3)
+    x *= y
+    assert x == Fraction(1, 3)
+
+    # Test case 3: Positive and negative fractions
+    x = Fraction(1, 2)
+    y = Fraction(-2, 3)
+    x *= y
+    assert x == Fraction(-1, 3)
+
+    # Test case 4: Fraction and integer
+    x = Fraction(3, 4)
+    y = Fraction(2, 1)  # Equivalent to integer 2
+    x *= y
+    assert x == Fraction(3, 2)
+
+    # Test case 5: Integer and fraction
+    x = Fraction(5, 1)  # Equivalent to integer 5
+    y = Fraction(1, 3)
+    x *= y
+    assert x == Fraction(5, 3)
+
+    # Test case 6: Multiplying by zero
+    x = Fraction(2, 3)
+    y = Fraction(0, 1)
+    x *= y
+    assert x == Fraction(0, 1)
+
+    # Test case 7: Multiplying by one
+    x = Fraction(3, 4)
+    y = Fraction(1, 1)
+    x *= y
+    assert x == Fraction(3, 4)
+
+    # Test case 8: Large numbers
+    x = Fraction(987654321, 123456789)
+    y = Fraction(123456789, 987654321)
+    x *= y
+    expected_numerator = 987654321 * 123456789
+    expected_denominator = 123456789 * 987654321
+    assert x == Fraction(expected_numerator, expected_denominator, True)
+
+
 
 # Run the tests
 if __name__ == "__main__":
