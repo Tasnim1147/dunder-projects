@@ -669,6 +669,21 @@ def test_fraction_from_decimal_method():
     assert high_precision_fraction.denominator == 12500000000000000
 
 
+def test_fraction_abs_method():
+    
+    negative_int = Fraction(-1, 1)
+    p_negative_int = abs(negative_int)
+    assert p_negative_int.numerator == 1
+    assert p_negative_int.denominator == 1
+    assert p_negative_int == 1
+    
+    negative_fraction = Fraction(-3, 7)
+    p_negative_fraction = abs(negative_fraction)
+    assert p_negative_fraction.denominator == 7
+    assert p_negative_fraction.numerator == 3
+    
+    
+
 # Run the tests
 if __name__ == "__main__":
     pytest.main()

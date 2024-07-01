@@ -256,6 +256,10 @@ class Fraction:
         """
         return self.numerator * other.denominator <= self.denominator * other.numerator
     
+    
+    def __abs__(self) -> 'Fraction':
+        return Fraction(abs(self.numerator), abs(self.denominator))
+    
     def simplify(self) -> None:
         """
         Simplifies the fraction to its lowest terms.
