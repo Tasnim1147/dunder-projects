@@ -236,6 +236,9 @@ class Fraction:
         self.denominator = _temp.denominator
         return self
     
+    def __pow__(self, other: int) -> 'Fraction':
+        return Fraction(self.numerator ** other, self.denominator ** other)
+    
     def __eq__(self, other: 'Fraction') -> bool:
         """
         Checks if two fractions are equal.
